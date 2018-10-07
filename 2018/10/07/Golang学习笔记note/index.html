@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://gitee.com/ab5051/blog">
-  <title>Archives | bobobobobo~</title>
+  <title>Golang学习笔记note | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="bobobobobo~">
-<meta property="og:url" content="https://gitee.com/ab5051/blog/archives/index.html">
+  <meta name="description" content="总览·=和:=·切片的生长（copy and append 函数）·位运算符·运算符优先级·map(集合)·Comma-ok">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang学习笔记note">
+<meta property="og:url" content="https://gitee.com/ab5051/blog/2018/10/07/Golang学习笔记note/index.html">
 <meta property="og:site_name" content="bobobobobo~">
+<meta property="og:description" content="总览·=和:=·切片的生长（copy and append 函数）·位运算符·运算符优先级·map(集合)·Comma-ok">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://gitee.com/blog/2018/10/07/Golang学习笔记note/weiyunsuan.png">
+<meta property="og:image" content="https://gitee.com/blog/2018/10/07/Golang学习笔记note/yunsuanyouxianji.png">
+<meta property="og:updated_time" content="2018-10-06T14:42:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bobobobobo~">
+<meta name="twitter:title" content="Golang学习笔记note">
+<meta name="twitter:description" content="总览·=和:=·切片的生长（copy and append 函数）·位运算符·运算符优先级·map(集合)·Comma-ok">
+<meta name="twitter:image" content="https://gitee.com/blog/2018/10/07/Golang学习笔记note/weiyunsuan.png">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -162,332 +169,192 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Golang学习笔记note" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Golang学习笔记note
+    </h1>
+  
+
+        
+        <a href="/blog/2018/10/07/Golang学习笔记note/" class="archive-article-date">
+  	<time datetime="2018-10-07T14:48:23.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><p>·=和:=<br>·切片的生长（copy and append 函数）<br>·位运算符<br>·运算符优先级<br>·map(集合)<br>·Comma-ok</p>
+<a id="more"></a>
+<h2 id="和"><a href="#和" class="headerlink" title="=和:="></a>=和:=</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># = 使用必须使用先var声明例如：</span></span><br><span class="line">var a</span><br><span class="line">a=100 或 var b = 100 或</span><br><span class="line">var c int = 100</span><br><span class="line"><span class="comment"># := 是声明并赋值，并且系统自动推断类型，不需要var关键字</span></span><br><span class="line">d := 100</span><br></pre></td></tr></table></figure>
+<p><strong>:= 只能用在函数内部 </strong></p>
+<h2 id="切片的生长（copy-and-append-函数）"><a href="#切片的生长（copy-and-append-函数）" class="headerlink" title="切片的生长（copy and append 函数）"></a>切片的生长（copy and append 函数）</h2><p>要增加切片的容量必须创建一个新的、更大容量的切片，然后将原有切片的内容复制到新的切片。 整个技术是一些支持动态数组语言的常见实现。下面的例子将切片 s 容量翻倍，先创建一个2倍 容量的新切片 t ，复制 s 的元素到 t ，然后将 t 赋值给 s </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t := make([]byte, len(s), (<span class="built_in">cap</span>(s)+1)*2) // +1 <span class="keyword">in</span> <span class="keyword">case</span> <span class="built_in">cap</span>(s) == 0</span><br><span class="line"><span class="keyword">for</span> i := range s &#123;</span><br><span class="line">        t[i] = s[i]</span><br><span class="line">&#125;</span><br><span class="line">s = t</span><br></pre></td></tr></table></figure>
+<p>循环中复制的操作可以由 copy 内置函数替代。copy 函数将源切片的元素复制到目的切片。 它返回复制元素的数目。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func copy(dst, src []T) int</span><br></pre></td></tr></table></figure>
+<p>copy 函数支持不同长度的切片之间的复制（它只复制较短切片的长度个元素）。 此外， copy 函数可以正确处理源和目的切片有重叠的情况。</p>
+<p>使用 copy 函数，我们可以简化上面的代码片段：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t := make([]byte, len(s), (<span class="built_in">cap</span>(s)+1)*2)</span><br><span class="line">copy(t, s)</span><br><span class="line">s = t</span><br></pre></td></tr></table></figure>
+<p>一个常见的操作是将数据追加到切片的尾部。下面的函数将元素追加到切片尾部， 必要的话会增加切片的容量，最后返回更新的切片：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">func AppendByte(slice []byte, data ...byte) []byte &#123;</span><br><span class="line">    m := len(slice)</span><br><span class="line">    n := m + len(data)</span><br><span class="line">    <span class="keyword">if</span> n &gt; <span class="built_in">cap</span>(slice) &#123; // <span class="keyword">if</span> necessary, reallocate</span><br><span class="line">        // allocate double what<span class="string">'s needed, for future growth.</span></span><br><span class="line"><span class="string">        newSlice := make([]byte, (n+1)*2)</span></span><br><span class="line"><span class="string">        copy(newSlice, slice)</span></span><br><span class="line"><span class="string">        slice = newSlice</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    slice = slice[0:n]</span></span><br><span class="line"><span class="string">    copy(slice[m:n], data)</span></span><br><span class="line"><span class="string">    return slice</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>下面是 AppendByte 的一种用法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p := []byte&#123;2, 3, 5&#125;</span><br><span class="line">p = AppendByte(p, 7, 11, 13)</span><br><span class="line"><span class="comment"># p == []byte&#123;2, 3, 5, 7, 11, 13&#125;</span></span><br></pre></td></tr></table></figure>
+<p>类似 AppendByte 的函数比较实用，因为它提供了切片容量增长的完全控制。 根据程序的特点，可能希望分配较小的活较大的块，或则是超过某个大小再分配。</p>
+<p>但大多数程序不需要完全的控制，因此Go提供了一个内置函数 append ， 用于大多数场合；它的函数签名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func append(s []T, x ...T) []T</span><br><span class="line">append 函数将 x 追加到切片 s 的末尾，并且在必要的时候增加容量。</span><br><span class="line"></span><br><span class="line">a := make([]int, 1)</span><br><span class="line"><span class="comment"># a == []int&#123;0&#125;</span></span><br><span class="line">a = append(a, 1, 2, 3)</span><br><span class="line"><span class="comment"># a == []int&#123;0, 1, 2, 3&#125;</span></span><br></pre></td></tr></table></figure>
+<p>如果是要将一个切片追加到另一个切片尾部，需要使用 … 语法将第2个参数展开为参数列表。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a := []string&#123;<span class="string">"John"</span>, <span class="string">"Paul"</span>&#125;</span><br><span class="line">b := []string&#123;<span class="string">"George"</span>, <span class="string">"Ringo"</span>, <span class="string">"Pete"</span>&#125;</span><br><span class="line">a = append(a, b...) // equivalent to <span class="string">"append(a, b[0], b[1], b[2])"</span></span><br><span class="line"><span class="comment"># a == []string&#123;"John", "Paul", "George", "Ringo", "Pete"&#125;</span></span><br></pre></td></tr></table></figure>
+<p>由于切片的零值 nil 用起来就像一个长度为零的切片，我们可以声明一个切片变量然后在循环 中向它追加数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Filter returns a new slice holding only</span></span><br><span class="line"><span class="comment"># the elements of s that satisfy f()</span></span><br><span class="line">func Filter(s []int, fn func(int) bool) []int &#123;</span><br><span class="line">    var p []int // == nil</span><br><span class="line">    <span class="keyword">for</span> _, v := range s &#123;</span><br><span class="line">        <span class="keyword">if</span> fn(v) &#123;</span><br><span class="line">            p = append(p, v)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可能的“陷阱”<br>正如前面所说，切片操作并不会复制底层的数组。整个数组将被保存在内存中，直到它不再被引用。 有时候可能会因为一个小的内存引用导致保存所有的数据。</p>
+<p>例如， FindDigits 函数加载整个文件到内存，然后搜索第一个连续的数字，最后结果以切片方式返回。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var digitRegexp = regexp.MustCompile(<span class="string">"[0-9]+"</span>)</span><br><span class="line"></span><br><span class="line">func FindDigits(filename string) []byte &#123;</span><br><span class="line">    b, _ := ioutil.ReadFile(filename)</span><br><span class="line">    <span class="built_in">return</span> digitRegexp.Find(b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码的行为和描述类似，返回的 []byte 指向保存整个文件的数组。因为切片引用了原始的数组， 导致 GC 不能释放数组的空间；只用到少数几个字节却导致整个文件的内容都一直保存在内存里。</p>
+<p>要修复整个问题，可以将感兴趣的数据复制到一个新的切片中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func CopyDigits(filename string) []byte &#123;</span><br><span class="line">    b, _ := ioutil.ReadFile(filename)</span><br><span class="line">    b = digitRegexp.Find(b)</span><br><span class="line">    c := make([]byte, len(b))</span><br><span class="line">    copy(c, b)</span><br><span class="line">    <span class="built_in">return</span> c</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以使用 append 实现一个更简洁的版本。这留给读者作为练习。</p>
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><img src="/blog/2018/10/07/Golang学习笔记note/weiyunsuan.png" title="test">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">   var a uint = 60    /* 60 = 0011 1100 */  </span><br><span class="line">   var b uint = 13    /* 13 = 0000 1101 */</span><br><span class="line">   var c uint = 0          </span><br><span class="line"></span><br><span class="line">   c = a &amp; b       /* 12 = 0000 1100 */ </span><br><span class="line">   fmt.Printf(<span class="string">"第一行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a | b       /* 61 = 0011 1101 */</span><br><span class="line">   fmt.Printf(<span class="string">"第二行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a ^ b       /* 49 = 0011 0001 */</span><br><span class="line">   fmt.Printf(<span class="string">"第三行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a &lt;&lt; 2     /* 240 = 1111 0000 */ </span><br><span class="line">   fmt.Printf(<span class="string">"第四行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a &gt;&gt; 2     /* 15 = 0000 1111 */</span><br><span class="line">   fmt.Printf(<span class="string">"第五行 - c 的值为 %d\n"</span>, c )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 第一行 - c 的值为 12</span></span><br><span class="line"><span class="comment"># 第二行 - c 的值为 61</span></span><br><span class="line"><span class="comment"># 第三行 - c 的值为 49</span></span><br><span class="line"><span class="comment"># 第四行 - c 的值为 240</span></span><br><span class="line"><span class="comment"># 第五行 - c 的值为 15</span></span><br></pre></td></tr></table></figure>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p>有些运算符拥有较高的优先级，二元运算符的运算方向均是从左至右。下表列出了所有运算符以及它们的优先级，由上至下代表优先级由高到低：</p>
+<img src="/blog/2018/10/07/Golang学习笔记note/yunsuanyouxianji.png" title="test">
+<p>当然，你可以通过使用括号来临时提升某个表达式的整体运算优先级。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">   var a int = 20</span><br><span class="line">   var b int = 10</span><br><span class="line">   var c int = 15</span><br><span class="line">   var d int = 5</span><br><span class="line">   var e int;</span><br><span class="line"></span><br><span class="line">   e = (a + b) * c / d;      // ( 30 * 15 ) / 5</span><br><span class="line">   fmt.Printf(<span class="string">"(a + b) * c / d 的值为 : %d\n"</span>,  e );</span><br><span class="line"></span><br><span class="line">   e = ((a + b) * c) / d;    // (30 * 15 ) / 5</span><br><span class="line">   fmt.Printf(<span class="string">"((a + b) * c) / d 的值为  : %d\n"</span> ,  e );</span><br><span class="line"></span><br><span class="line">   e = (a + b) * (c / d);   // (30) * (15/5)</span><br><span class="line">   fmt.Printf(<span class="string">"(a + b) * (c / d) 的值为  : %d\n"</span>,  e );</span><br><span class="line"></span><br><span class="line">   e = a + (b * c) / d;     //  20 + (150/5)</span><br><span class="line">   fmt.Printf(<span class="string">"a + (b * c) / d 的值为  : %d\n"</span> ,  e );  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># (a + b) * c / d 的值为 : 90</span></span><br><span class="line"><span class="comment"># ((a + b) * c) / d 的值为  : 90</span></span><br><span class="line"><span class="comment"># (a + b) * (c / d) 的值为  : 90</span></span><br><span class="line"><span class="comment"># a + (b * c) / d 的值为  : 50</span></span><br></pre></td></tr></table></figure>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>Map 是一种无序的键值对的集合。Map 最重要的一点是通过 key 来快速检索数据，key 类似于索引，指向数据的值。<br>Map 是一种集合，所以我们可以像迭代数组和切片那样迭代它。不过，Map 是无序的，我们无法决定它的返回顺序，这是因为 Map 是使用 hash 表来实现的。</p>
+<h3 id="定义-Map"><a href="#定义-Map" class="headerlink" title="定义 Map"></a>定义 Map</h3><p>可以使用内建函数 make 也可以使用 map 关键字来定义 Map:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 声明变量，默认 map 是 nil </span></span><br><span class="line">var map_variable map[key_data_type]value_data_type</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 make 函数 </span></span><br><span class="line">map_variable := make(map[key_data_type]value_data_type)</span><br></pre></td></tr></table></figure>
+<p>如果不初始化 map，那么就会创建一个 nil map。nil map 不能用来存放键值对</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面实例演示了创建和使用map:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    var countryCapitalMap map[string]string /*创建集合 */</span><br><span class="line">    countryCapitalMap = make(map[string]string)</span><br><span class="line"></span><br><span class="line">    /* map插入key - value对,各个国家对应的首都 */</span><br><span class="line">    countryCapitalMap [ <span class="string">"France"</span> ] = <span class="string">"Paris"</span></span><br><span class="line">    countryCapitalMap [ <span class="string">"Italy"</span> ] = <span class="string">"罗马"</span></span><br><span class="line">    countryCapitalMap [ <span class="string">"Japan"</span> ] = <span class="string">"东京"</span></span><br><span class="line">    countryCapitalMap [ <span class="string">"India "</span> ] = <span class="string">"新德里"</span></span><br><span class="line"></span><br><span class="line">    /*使用键输出地图值 */ <span class="keyword">for</span> country := range countryCapitalMap &#123;</span><br><span class="line">        fmt.Println(country, <span class="string">"首都是"</span>, countryCapitalMap [country])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*查看元素在集合中是否存在 */</span><br><span class="line">    captial, ok := countryCapitalMap [ <span class="string">"美国"</span> ] /*如果确定是真实的,则存在,否则不存在 */</span><br><span class="line">    /*fmt.Println(captial) */</span><br><span class="line">    /*fmt.Println(ok) */</span><br><span class="line">    <span class="keyword">if</span> (ok) &#123;</span><br><span class="line">        fmt.Println(<span class="string">"美国的首都是"</span>, captial)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"美国的首都不存在"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># France 首都是 Paris</span></span><br><span class="line"><span class="comment"># Italy 首都是 罗马</span></span><br><span class="line"><span class="comment"># Japan 首都是 东京</span></span><br><span class="line"><span class="comment"># India  首都是 新德里</span></span><br><span class="line"><span class="comment"># 美国的首都不存在</span></span><br></pre></td></tr></table></figure>
+<h3 id="delete-函数"><a href="#delete-函数" class="headerlink" title="delete() 函数"></a>delete() 函数</h3><p>delete() 函数用于删除集合的元素, 参数为 map 和其对应的 key。实例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="comment"># 创建map </span></span><br><span class="line">    countryCapitalMap := map[string]string&#123;<span class="string">"France"</span>: <span class="string">"Paris"</span>, <span class="string">"Italy"</span>: <span class="string">"Rome"</span>, <span class="string">"Japan"</span>: <span class="string">"Tokyo"</span>, <span class="string">"India"</span>: <span class="string">"New delhi"</span>&#125;</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"原始地图"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印地图 </span></span><br><span class="line">    <span class="keyword">for</span> country := range countryCapitalMap &#123;</span><br><span class="line">        fmt.Println(country, <span class="string">"首都是"</span>, countryCapitalMap [ country ])</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 删除元素 </span></span><br><span class="line">    delete(countryCapitalMap, <span class="string">"France"</span>)</span><br><span class="line">    fmt.Println(<span class="string">"法国条目被删除"</span>)</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"删除元素后地图"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印地图</span></span><br><span class="line">    <span class="keyword">for</span> country := range countryCapitalMap &#123;</span><br><span class="line">        fmt.Println(country, <span class="string">"首都是"</span>, countryCapitalMap [ country ])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始地图</span></span><br><span class="line"><span class="comment"># India 首都是 New delhi</span></span><br><span class="line"><span class="comment"># France 首都是 Paris</span></span><br><span class="line"><span class="comment"># Italy 首都是 Rome</span></span><br><span class="line"><span class="comment"># Japan 首都是 Tokyo</span></span><br><span class="line"><span class="comment"># 法国条目被删除</span></span><br><span class="line"><span class="comment"># 删除元素后地图</span></span><br><span class="line"><span class="comment"># Italy 首都是 Rome</span></span><br><span class="line"><span class="comment"># Japan 首都是 Tokyo</span></span><br><span class="line"><span class="comment"># India 首都是 New delhi</span></span><br></pre></td></tr></table></figure>
+<h2 id="Comma-ok"><a href="#Comma-ok" class="headerlink" title="Comma-ok"></a>Comma-ok</h2><p>Comma-ok断言的语法是：value, ok := element.(T)。element必须是接口类型的变量，T是普通类型。如果断言失败，ok为false，否则ok为true并且value为变量的值。来看个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span> Html []interface&#123;&#125;</span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    html := make(Html, 5)</span><br><span class="line">    html[0] = <span class="string">"div"</span></span><br><span class="line">    html[1] = <span class="string">"span"</span></span><br><span class="line">    html[2] = []byte(<span class="string">"script"</span>)</span><br><span class="line">    html[3] = <span class="string">"style"</span></span><br><span class="line">    html[4] = <span class="string">"head"</span></span><br><span class="line">    <span class="keyword">for</span> index, element := range html &#123;</span><br><span class="line">        <span class="keyword">if</span> value, ok := element.(string); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"html[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> value, ok := element.([]byte); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"html[%d] is a []byte and its value is %s\n"</span>, index, string(value))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实Comma-ok断言还支持另一种简化使用的方式：value := element.(T)。但这种方式不建议使用，因为一旦element.(T)断言失败，则会产生运行时错误。如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    var val interface&#123;&#125; = <span class="string">"good"</span></span><br><span class="line">    fmt.Println(val.(string))</span><br><span class="line">    // fmt.Println(val.(int))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上的代码中被注释的那一行会运行时错误。这是因为val实际存储的是string类型，因此断言失败。<br>还有一种转换方式是switch测试。既然称之为switch测试，也就是说这种转换方式只能出现在switch语句中。可以很轻松的将刚才用Comma-ok断言的例子换成由switch测试来实现：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span> Html []interface&#123;&#125;</span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    html := make(Html, 5)</span><br><span class="line">    html[0] = <span class="string">"div"</span></span><br><span class="line">    html[1] = <span class="string">"span"</span></span><br><span class="line">    html[2] = []byte(<span class="string">"script"</span>)</span><br><span class="line">    html[3] = <span class="string">"style"</span></span><br><span class="line">    html[4] = <span class="string">"head"</span></span><br><span class="line">    <span class="keyword">for</span> index, element := range html &#123;</span><br><span class="line">        switch value := element.(<span class="built_in">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> string:</span><br><span class="line">            fmt.Printf(<span class="string">"html[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">        <span class="keyword">case</span> []byte:</span><br><span class="line">            fmt.Printf(<span class="string">"html[%d] is a []byte and its value is %s\n"</span>, index, string(value))</span><br><span class="line">        <span class="keyword">case</span> int:</span><br><span class="line">            fmt.Printf(<span class="string">"invalid type\n"</span>)</span><br><span class="line">        default:</span><br><span class="line">            fmt.Printf(<span class="string">"unknown type\n"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/10/07/Golang学习笔记2/" class="archive-article-date">
-  	<time datetime="2018-10-07T14:48:23.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/10/07/Golang学习笔记2/">Golang学习笔记2</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://gitee.com/ab5051/blog/2018/10/07/Golang学习笔记note/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/10/07/Golang学习笔记3/" class="archive-article-date">
-  	<time datetime="2018-10-07T14:48:23.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/blog/2018/10/07/Golang学习笔记3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Golang学习笔记3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2018/10/07/Golang学习笔记1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Golang学习笔记1</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/10/07/Golang学习笔记3/">Golang学习笔记3</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/10/07/Golang学习笔记note/" class="archive-article-date">
-  	<time datetime="2018-10-07T14:48:23.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/10/07/Golang学习笔记note/">Golang学习笔记note</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/10/07/Golang学习笔记1/" class="archive-article-date">
-  	<time datetime="2018-10-07T14:48:23.063Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/10/07/Golang学习笔记1/">Golang学习笔记1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/10/04/golangnote/" class="archive-article-date">
-  	<time datetime="2018-10-04T10:07:21.368Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/10/04/golangnote/">Golang学习笔记1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/06/16/hexo-github-一些功能的实现/" class="archive-article-date">
-  	<time datetime="2018-06-16T01:58:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/16/hexo-github-一些功能的实现/">hexo+github 一些功能的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/06/15/hexo-github-常见问题/" class="archive-article-date">
-  	<time datetime="2018-06-15T07:57:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/15/hexo-github-常见问题/">hexo+github 常见问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/06/14/hexo-github-building-process/" class="archive-article-date">
-  	<time datetime="2018-06-14T10:44:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/14/hexo-github-building-process/">[hexo+github building process]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/06/13/test-my-site-1/" class="archive-article-date">
-  	<time datetime="2018-06-12T18:12:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/06/13/test-my-site-1/">hello myfriend</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/essay//" class="article-tag-list-link color1">essay</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -510,8 +377,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
