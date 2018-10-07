@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="https://gitee.com/ab5051/blog">
   <title>Golang学习笔记note | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总览·=和:=·切片的生长（copy and append 函数）·位运算符·运算符优先级·map(集合)·Comma-ok">
+  <meta name="description" content="总览 =和:= 切片的生长（copy and append 函数） 位运算符 运算符优先级 map(集合) Comma-ok">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang学习笔记note">
 <meta property="og:url" content="https://gitee.com/ab5051/blog/2018/10/07/Golang学习笔记note/index.html">
 <meta property="og:site_name" content="bobobobobo~">
-<meta property="og:description" content="总览·=和:=·切片的生长（copy and append 函数）·位运算符·运算符优先级·map(集合)·Comma-ok">
+<meta property="og:description" content="总览 =和:= 切片的生长（copy and append 函数） 位运算符 运算符优先级 map(集合) Comma-ok">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://gitee.com/blog/2018/10/07/Golang学习笔记note/weiyunsuan.png">
 <meta property="og:image" content="https://gitee.com/blog/2018/10/07/Golang学习笔记note/yunsuanyouxianji.png">
-<meta property="og:updated_time" content="2018-10-06T14:42:14.000Z">
+<meta property="og:updated_time" content="2018-10-07T14:54:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang学习笔记note">
-<meta name="twitter:description" content="总览·=和:=·切片的生长（copy and append 函数）·位运算符·运算符优先级·map(集合)·Comma-ok">
+<meta name="twitter:description" content="总览 =和:= 切片的生长（copy and append 函数） 位运算符 运算符优先级 map(集合) Comma-ok">
 <meta name="twitter:image" content="https://gitee.com/blog/2018/10/07/Golang学习笔记note/weiyunsuan.png">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
@@ -182,14 +182,21 @@
 
         
         <a href="/blog/2018/10/07/Golang学习笔记note/" class="archive-article-date">
-  	<time datetime="2018-10-07T14:48:23.067Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
+  	<time datetime="2018-10-07T14:57:21.508Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><p>·=和:=<br>·切片的生长（copy and append 函数）<br>·位运算符<br>·运算符优先级<br>·map(集合)<br>·Comma-ok</p>
+        <h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><ul>
+<li>=和:=</li>
+<li>切片的生长（copy and append 函数）</li>
+<li>位运算符</li>
+<li>运算符优先级</li>
+<li>map(集合)</li>
+<li>Comma-ok</li>
+</ul>
 <a id="more"></a>
 <h2 id="和"><a href="#和" class="headerlink" title="=和:="></a>=和:=</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># = 使用必须使用先var声明例如：</span></span><br><span class="line">var a</span><br><span class="line">a=100 或 var b = 100 或</span><br><span class="line">var c int = 100</span><br><span class="line"><span class="comment"># := 是声明并赋值，并且系统自动推断类型，不需要var关键字</span></span><br><span class="line">d := 100</span><br></pre></td></tr></table></figure>
 <p><strong>:= 只能用在函数内部 </strong></p>
@@ -310,17 +317,8 @@
   
 <nav id="article-nav">
   
-    <a href="/blog/2018/10/07/Golang学习笔记3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Golang学习笔记3
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2018/10/07/Golang学习笔记1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2018/10/04/golangnote/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Golang学习笔记1</div>
       <i class="icon-circle-right"></i>
     </a>
