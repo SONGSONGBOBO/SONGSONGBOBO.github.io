@@ -8,20 +8,21 @@
   <link rel="dns-prefetch" href="https://gitee.com/ab5051/blog">
   <title>hexo+github 一些功能的实现 | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册  更换主题比较流行的、功能也比较丰富的主题;1.yilia主题 实现效果2.next主题 实现效果 next文档3.yelee主题 实现效果 yelee文档 在创建的blog根目录中打开git bash输入： 1$ git clone https://github.com/xxxx/hexo-theme-xxx.g">
+  <meta name="description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册">
+<meta name="keywords" content="hexo,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo+github 一些功能的实现">
 <meta property="og:url" content="https://gitee.com/ab5051/blog/2018/06/16/hexo-github-一些功能的实现/index.html">
 <meta property="og:site_name" content="bobobobobo~">
-<meta property="og:description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册  更换主题比较流行的、功能也比较丰富的主题;1.yilia主题 实现效果2.next主题 实现效果 next文档3.yelee主题 实现效果 yelee文档 在创建的blog根目录中打开git bash输入： 1$ git clone https://github.com/xxxx/hexo-theme-xxx.g">
+<meta property="og:description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://gitee.com/blog/2018/06/16/hexo-github-一些功能的实现/laibili.jpg">
 <meta property="og:image" content="https://gitee.com/blog/2018/06/16/hexo-github-一些功能的实现/pillow.png">
 <meta property="og:image" content="https://gitee.com/blog/2018/06/16/hexo-github-一些功能的实现/menu.PNG">
-<meta property="og:updated_time" content="2018-10-07T14:09:51.664Z">
+<meta property="og:updated_time" content="2018-10-07T14:37:51.988Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+github 一些功能的实现">
-<meta name="twitter:description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册  更换主题比较流行的、功能也比较丰富的主题;1.yilia主题 实现效果2.next主题 实现效果 next文档3.yelee主题 实现效果 yelee文档 在创建的blog根目录中打开git bash输入： 1$ git clone https://github.com/xxxx/hexo-theme-xxx.g">
+<meta name="twitter:description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册">
 <meta name="twitter:image" content="https://gitee.com/blog/2018/06/16/hexo-github-一些功能的实现/laibili.jpg">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
@@ -198,6 +199,7 @@
 <li>评论</li>
 <li>相册</li>
 </ul>
+<a id="more"></a>
 <h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>比较流行的、功能也比较丰富的主题;<br>1.<a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">yilia主题</a> <a href="http://litten.me/" target="_blank" rel="noopener">实现效果</a><br>2.<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">next主题</a> <a href="https://notes.iissnan.com/" target="_blank" rel="noopener">实现效果</a> <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">next文档</a><br>3.<a href="https://github.com/MOxFIVE/hexo-theme-yelee.git" target="_blank" rel="noopener">yelee主题</a> <a href="http://moxfive.xyz/" target="_blank" rel="noopener">实现效果</a> <a href="http://moxfive.coding.me/yelee/" target="_blank" rel="noopener">yelee文档</a></p>
 <p>在创建的blog根目录中打开git bash输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/xxxx/hexo-theme-xxx.git themes/xxx</span><br></pre></td></tr></table></figure>
@@ -245,6 +247,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       

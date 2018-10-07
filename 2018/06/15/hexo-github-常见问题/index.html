@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://gitee.com/ab5051/blog">
   <title>hexo+github 常见问题 | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="搭建和添加一些功能时所踩过的坑~ 端口号占用插入图片评论###">
+  <meta name="description" content="搭建和添加一些功能时所踩过的坑~ 内容概要 常见语法问题 端口号占用 插入图片没有预览 利用GitHub实现相册url">
 <meta name="keywords" content="hexo,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo+github 常见问题">
 <meta property="og:url" content="https://gitee.com/ab5051/blog/2018/06/15/hexo-github-常见问题/index.html">
 <meta property="og:site_name" content="bobobobobo~">
-<meta property="og:description" content="搭建和添加一些功能时所踩过的坑~ 端口号占用插入图片评论###">
+<meta property="og:description" content="搭建和添加一些功能时所踩过的坑~ 内容概要 常见语法问题 端口号占用 插入图片没有预览 利用GitHub实现相册url">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-19T04:24:56.000Z">
+<meta property="og:updated_time" content="2018-10-07T14:37:22.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+github 常见问题">
-<meta name="twitter:description" content="搭建和添加一些功能时所踩过的坑~ 端口号占用插入图片评论###">
+<meta name="twitter:description" content="搭建和添加一些功能时所踩过的坑~ 内容概要 常见语法问题 端口号占用 插入图片没有预览 利用GitHub实现相册url">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -188,7 +188,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>搭建和添加一些功能时所踩过的坑~</p>
-<h3 id="端口号占用"><a href="#端口号占用" class="headerlink" title="端口号占用"></a>端口号占用</h3><h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>### </p>
+<h2 id="内容概要"><a href="#内容概要" class="headerlink" title="内容概要"></a>内容概要</h2><ul>
+<li>常见语法问题</li>
+<li>端口号占用</li>
+<li>插入图片没有预览</li>
+<li>利用GitHub实现相册url</li>
+</ul>
+<a id="more"></a>
+<h2 id="常见语法问题"><a href="#常见语法问题" class="headerlink" title="常见语法问题"></a>常见语法问题</h2><p><a href="http://www.markdown.cn/#overview" target="_blank" rel="noopener">markdown文档</a><br>markdown对于语法格式要求很严格，缩进和空格要多注意</p>
+<h2 id="端口号占用"><a href="#端口号占用" class="headerlink" title="端口号占用"></a>端口号占用</h2><p>在命令行中输入 netstat -ano 即可查看端口占用情况，输入 taskkill /f /t /xxx(占用端口的进程) 可以结束进程。<a href="https://jingyan.baidu.com/article/3c48dd34491d47e10be358b8.html" target="_blank" rel="noopener">详细内容</a><br>在git bash中更改server端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s -p xxxx  <span class="comment">#重设端口为xxxx</span></span><br></pre></td></tr></table></figure>
+<h2 id="插入图片没有预览"><a href="#插入图片没有预览" class="headerlink" title="插入图片没有预览"></a>插入图片没有预览</h2><p>在2.x版本中在文章中插入图片没有预览</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[xxx](xxx/xxx.jpg)</span><br></pre></td></tr></table></figure>
+<p>在3.x版本可以添加预览</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img xxx.PNG xxx %&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="利用GitHub实现相册url"><a href="#利用GitHub实现相册url" class="headerlink" title="利用GitHub实现相册url"></a>利用GitHub实现相册url</h2><p>相册在render函数中的保存图片的地址需写成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ var minSrc = <span class="string">'https://raw.githubusercontent.com/自己的用户名/保存图片的仓库/master/xxxphotos/'</span> + data.link[i];</span><br></pre></td></tr></table></figure>
 
       
 
@@ -314,7 +329,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口号占用"><span class="toc-number">1.</span> <span class="toc-text">端口号占用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入图片"><span class="toc-number">2.</span> <span class="toc-text">插入图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评论"><span class="toc-number">3.</span> <span class="toc-text">评论</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内容概要"><span class="toc-number">1.</span> <span class="toc-text">内容概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见语法问题"><span class="toc-number">2.</span> <span class="toc-text">常见语法问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#端口号占用"><span class="toc-number">3.</span> <span class="toc-text">端口号占用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入图片没有预览"><span class="toc-number">4.</span> <span class="toc-text">插入图片没有预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用GitHub实现相册url"><span class="toc-number">5.</span> <span class="toc-text">利用GitHub实现相册url</span></a></li></ol>
                     </div>
                 </span>
             </div>
