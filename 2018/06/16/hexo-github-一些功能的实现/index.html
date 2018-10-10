@@ -5,25 +5,25 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://imsongbo.com">
   <title>hexo+github 一些功能的实现 | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册">
 <meta name="keywords" content="hexo,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo+github 一些功能的实现">
-<meta property="og:url" content="http://yoursite.com/2018/06/16/hexo-github-一些功能的实现/index.html">
+<meta property="og:url" content="http://imsongbo.com/2018/06/16/hexo-github-一些功能的实现/index.html">
 <meta property="og:site_name" content="bobobobobo~">
 <meta property="og:description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/06/16/hexo-github-一些功能的实现/laibili.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/06/16/hexo-github-一些功能的实现/pillow.png">
-<meta property="og:image" content="http://yoursite.com/2018/06/16/hexo-github-一些功能的实现/menu.PNG">
+<meta property="og:image" content="http://imsongbo.com/blog/2018/06/16/hexo-github-一些功能的实现/laibili.jpg">
+<meta property="og:image" content="http://imsongbo.com/blog/2018/06/16/hexo-github-一些功能的实现/pillow.png">
+<meta property="og:image" content="http://imsongbo.com/blog/2018/06/16/hexo-github-一些功能的实现/menu.PNG">
 <meta property="og:updated_time" content="2018-10-07T14:37:51.988Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+github 一些功能的实现">
 <meta name="twitter:description" content="内容概要 更换主题 blog主页文章预览大小 评论 文章字数和阅读时长 评论 相册">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/16/hexo-github-一些功能的实现/laibili.jpg">
+<meta name="twitter:image" content="http://imsongbo.com/blog/2018/06/16/hexo-github-一些功能的实现/laibili.jpg">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -232,7 +232,7 @@
 <h2 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h2><p>网上查了很多种，有一些不让用了，有一些广告比较多，还有的需要翻墙不方便，这里推荐两种</p>
 <h3 id="来必力"><a href="#来必力" class="headerlink" title="来必力"></a>来必力</h3><p>来必力简单，没有广告，支持多种账号登录</p>
 <p>1.登陆注册来必力<br>2.在右上角可以进入管理界面，可以进行各种配置</p>
-<img src="/2018/06/16/hexo-github-一些功能的实现/laibili.jpg" title="test">
+<img src="/blog/2018/06/16/hexo-github-一些功能的实现/laibili.jpg" title="test">
 <p>3.在 themes/主题名/layout/_partial/xxx文件夹创建livere.ejs文件，将管理界面中的代码管理所提供的代码拷贝于此。<br>4.在theme/主题名/_config.yml中添加配置信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">livere: </span><br><span class="line">   on: ture</span><br><span class="line">   livere_uid: your uid</span><br></pre></td></tr></table></figure>
 <p>5.在themes/xxxx/layout/_partial/article.ejs中，配置评论</p>
@@ -245,13 +245,13 @@
 <p>5.在article.ejs中添加</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (theme.gitment_owner &amp;&amp; theme.gitment_repo &amp;&amp;theme.gitment_oauth &amp;&amp; theme.gitment_oauth.client_id &amp;&amp; theme.gitment_oauth.client_secret)&#123; %&gt;</span><br><span class="line">&lt;%- partial(<span class="string">'post/gitment'</span>, &#123;</span><br><span class="line">    key: post.slug,</span><br><span class="line">    title: post.title,</span><br><span class="line">    url: config.url+url_for(post.path)</span><br><span class="line">  &#125;) %&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="相册"><a href="#相册" class="headerlink" title="相册"></a>相册</h2><h3 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h3><p>PIL（Python Imaging Library）是Python常用的图像处理库，而Pillow是PIL的一个友好Fork，提供了了广泛的文件格式支持，强大的图像处理能力，主要包括图像储存、图像显示、格式转换以及基本的图像处理操作等。<br>1.安装python环境<br>2.新版的python都有pip，直接安装pil</p>
-<img src="/2018/06/16/hexo-github-一些功能的实现/pillow.png" title="test02">
+<img src="/blog/2018/06/16/hexo-github-一些功能的实现/pillow.png" title="test02">
 <h3 id="创建点击链接"><a href="#创建点击链接" class="headerlink" title="创建点击链接"></a>创建点击链接</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page photos</span><br></pre></td></tr></table></figure>
 <p>立即在source下生成photos/index.md文件，然后在主题站点的配置文件theme/yelee/_config.yml中添加点击的文案和跳转到位置。</p>
-<img src="/2018/06/16/hexo-github-一些功能的实现/menu.PNG" title="test03">
+<img src="/blog/2018/06/16/hexo-github-一些功能的实现/menu.PNG" title="test03">
 <h3 id="处理图片"><a href="#处理图片" class="headerlink" title="处理图片"></a>处理图片</h3><p>对于相册浏览，要有预览时的缩略图和点击后的原图，所以在blog根目录中创建两个文件夹，一个放小图，一个放原图<br>1.首先可以参考他人<a href="https://github.com/SONGSONGBOBO/blogdata/tree/master/source/photos" target="_blank" rel="noopener">blog备份</a><br>2.修改ins.js文件render()函数，修改两个src即可</p>
 
-<p>3.对于图片的压缩、生成json数据和图片的上传使用python脚本解决，<a href="https://github.com/SONGSONGBOBO/blogdata" target="_blank" rel="noopener">脚本地址</a>,代码在tool.py中查看<br>4.blog部署后，效果可以看<a href="http://imsongbo.com/photos/" target="_blank" rel="noopener">我的相册</a>。</p>
+<p>3.对于图片的压缩、生成json数据和图片的上传使用python脚本解决，<a href="https://github.com/SONGSONGBOBO/blogdata" target="_blank" rel="noopener">脚本地址</a>,代码在tool.py中查看<br>4.blog部署后，效果可以看<a href="http://imsongbo.com/photos/">我的相册</a>。</p>
 <h2 id="文章字数和阅读时长"><a href="#文章字数和阅读时长" class="headerlink" title="文章字数和阅读时长"></a>文章字数和阅读时长</h2><p><a href="https://www.npmjs.com/package/hexo-wordcount" target="_blank" rel="noopener">hexo-wordcount使用文档</a><br>1.安装hexo-wordcount</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i --save hexo-wordcount</span><br></pre></td></tr></table></figure>
 <p>2.themes下的config.xml中配置是否需要功能的flag</p>
@@ -335,7 +335,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/16/hexo-github-一些功能的实现/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://imsongbo.com/2018/06/16/hexo-github-一些功能的实现/" alt="微信分享二维码">
     </div>
 </div>
 

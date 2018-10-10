@@ -5,24 +5,24 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://imsongbo.com">
   <title>[hexo+github building process] | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="闲的没事自己试着搭了下博客，记录一下搭建过程，给像我这样的小白一点经验。Hexo官网  步骤·搭建之前·个人域名·github与git·hexo·hexo与GitHub关联·绑定域名">
 <meta name="keywords" content="hexo,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[hexo+github building process]">
-<meta property="og:url" content="http://yoursite.com/2018/06/14/hexo-github-building-process/index.html">
+<meta property="og:url" content="http://imsongbo.com/2018/06/14/hexo-github-building-process/index.html">
 <meta property="og:site_name" content="bobobobobo~">
 <meta property="og:description" content="闲的没事自己试着搭了下博客，记录一下搭建过程，给像我这样的小白一点经验。Hexo官网  步骤·搭建之前·个人域名·github与git·hexo·hexo与GitHub关联·绑定域名">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/06/14/hexo-github-building-process/yumingjiexi.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/06/14/hexo-github-building-process/ssh.PNG">
+<meta property="og:image" content="http://imsongbo.com/blog/2018/06/14/hexo-github-building-process/yumingjiexi.PNG">
+<meta property="og:image" content="http://imsongbo.com/blog/2018/06/14/hexo-github-building-process/ssh.PNG">
 <meta property="og:updated_time" content="2018-06-19T04:24:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[hexo+github building process]">
 <meta name="twitter:description" content="闲的没事自己试着搭了下博客，记录一下搭建过程，给像我这样的小白一点经验。Hexo官网  步骤·搭建之前·个人域名·github与git·hexo·hexo与GitHub关联·绑定域名">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/14/hexo-github-building-process/yumingjiexi.PNG">
+<meta name="twitter:image" content="http://imsongbo.com/blog/2018/06/14/hexo-github-building-process/yumingjiexi.PNG">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -218,13 +218,13 @@
 <a id="more"></a>
 <h3 id="搭建之前"><a href="#搭建之前" class="headerlink" title="搭建之前"></a>搭建之前</h3><p>1.安装node.js和npm和git<br>2.GitHub账号<br>我的环境是:win10 node-v8.11.2-x64<br>命令行命令建议使用git bash here</p>
 <h3 id="个人域名"><a href="#个人域名" class="headerlink" title="个人域名"></a>个人域名</h3><p>我是在阿里云注册的域名，按照官网步骤注册即可，一般.top比较便宜。</p>
-<h4 id="解析域名"><a href="#解析域名" class="headerlink" title="解析域名"></a>解析域名</h4><p>进入控制台可以在自己注册的域名右侧有解析选项，添加两个记录，记录名分别为A和CNAME。<br><img src="/2018/06/14/hexo-github-building-process/yumingjiexi.PNG" title="test"><br>A的记录值为你的gihub的ip，可以ping 用户名.github.io获取一下。<br>CNAME的记录值为 用户名.github.io</p>
+<h4 id="解析域名"><a href="#解析域名" class="headerlink" title="解析域名"></a>解析域名</h4><p>进入控制台可以在自己注册的域名右侧有解析选项，添加两个记录，记录名分别为A和CNAME。<br><img src="/blog/2018/06/14/hexo-github-building-process/yumingjiexi.PNG" title="test"><br>A的记录值为你的gihub的ip，可以ping 用户名.github.io获取一下。<br>CNAME的记录值为 用户名.github.io</p>
 <h3 id="github与git"><a href="#github与git" class="headerlink" title="github与git"></a>github与git</h3><h4 id="GitHub建立仓库"><a href="#GitHub建立仓库" class="headerlink" title="GitHub建立仓库"></a>GitHub建立仓库</h4><p>在GitHub中建立个人仓库，仓库名字为 用户名.github.io 这个用户名必须是你的GitHub的账号名。</p>
 <h4 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h4><p>廖雪峰老师的<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">git教程</a>,安装成功后，右键git bash here 配置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global username <span class="string">"自己的github用户名"</span></span><br><span class="line">$ git config --global mail <span class="string">"自己的github注册邮箱"</span></span><br></pre></td></tr></table></figure>
 <h4 id="配置ssh-key"><a href="#配置ssh-key" class="headerlink" title="配置ssh key"></a>配置ssh key</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"你的GitHub注册邮箱"</span> <span class="comment">#生成ssh密钥文件</span></span><br></pre></td></tr></table></figure>
 <p>在user目录下找到.ssh文件,复制id_rsa.pub文件的内容，粘贴到GitHub中新建的ssh key中，title随便写一下。</p>
-<img src="/2018/06/14/hexo-github-building-process/ssh.PNG" title="test">
+<img src="/blog/2018/06/14/hexo-github-building-process/ssh.PNG" title="test">
 <p>在命令行中验证是否安装成功。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com <span class="comment">#不需要修改</span></span><br></pre></td></tr></table></figure>
 <p>如果有提示yes/no，输入yes，出现Hi xxxxxx! You’ve successfully authenticated, but GitHub does not provide shell access.则配置成功。</p>
@@ -317,7 +317,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/14/hexo-github-building-process/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://imsongbo.com/2018/06/14/hexo-github-building-process/" alt="微信分享二维码">
     </div>
 </div>
 

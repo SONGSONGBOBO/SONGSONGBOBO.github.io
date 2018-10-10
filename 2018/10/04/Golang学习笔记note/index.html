@@ -5,23 +5,23 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://imsongbo.com">
   <title>Golang学习笔记note | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="总览 =和:= 切片的生长（copy and append 函数） 位运算符 运算符优先级 map(集合) Comma-ok">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang学习笔记note">
-<meta property="og:url" content="http://yoursite.com/2018/10/04/Golang学习笔记note/index.html">
+<meta property="og:url" content="http://imsongbo.com/2018/10/04/Golang学习笔记note/index.html">
 <meta property="og:site_name" content="bobobobobo~">
 <meta property="og:description" content="总览 =和:= 切片的生长（copy and append 函数） 位运算符 运算符优先级 map(集合) Comma-ok">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/10/04/Golang学习笔记note/weiyunsuan.png">
-<meta property="og:image" content="http://yoursite.com/2018/10/04/Golang学习笔记note/yunsuanyouxianji.png">
+<meta property="og:image" content="http://imsongbo.com/blog/2018/10/04/Golang学习笔记note/weiyunsuan.png">
+<meta property="og:image" content="http://imsongbo.com/blog/2018/10/04/Golang学习笔记note/yunsuanyouxianji.png">
 <meta property="og:updated_time" content="2018-10-07T15:03:54.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang学习笔记note">
 <meta name="twitter:description" content="总览 =和:= 切片的生长（copy and append 函数） 位运算符 运算符优先级 map(集合) Comma-ok">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/04/Golang学习笔记note/weiyunsuan.png">
+<meta name="twitter:image" content="http://imsongbo.com/blog/2018/10/04/Golang学习笔记note/weiyunsuan.png">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -248,10 +248,10 @@
 <p>要修复整个问题，可以将感兴趣的数据复制到一个新的切片中：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func CopyDigits(filename string) []byte &#123;</span><br><span class="line">    b, _ := ioutil.ReadFile(filename)</span><br><span class="line">    b = digitRegexp.Find(b)</span><br><span class="line">    c := make([]byte, len(b))</span><br><span class="line">    copy(c, b)</span><br><span class="line">    <span class="built_in">return</span> c</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以使用 append 实现一个更简洁的版本。这留给读者作为练习。</p>
-<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><img src="/2018/10/04/Golang学习笔记note/weiyunsuan.png" title="test">
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><img src="/blog/2018/10/04/Golang学习笔记note/weiyunsuan.png" title="test">
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">   var a uint = 60    /* 60 = 0011 1100 */  </span><br><span class="line">   var b uint = 13    /* 13 = 0000 1101 */</span><br><span class="line">   var c uint = 0          </span><br><span class="line"></span><br><span class="line">   c = a &amp; b       /* 12 = 0000 1100 */ </span><br><span class="line">   fmt.Printf(<span class="string">"第一行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a | b       /* 61 = 0011 1101 */</span><br><span class="line">   fmt.Printf(<span class="string">"第二行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a ^ b       /* 49 = 0011 0001 */</span><br><span class="line">   fmt.Printf(<span class="string">"第三行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a &lt;&lt; 2     /* 240 = 1111 0000 */ </span><br><span class="line">   fmt.Printf(<span class="string">"第四行 - c 的值为 %d\n"</span>, c )</span><br><span class="line"></span><br><span class="line">   c = a &gt;&gt; 2     /* 15 = 0000 1111 */</span><br><span class="line">   fmt.Printf(<span class="string">"第五行 - c 的值为 %d\n"</span>, c )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 第一行 - c 的值为 12</span></span><br><span class="line"><span class="comment"># 第二行 - c 的值为 61</span></span><br><span class="line"><span class="comment"># 第三行 - c 的值为 49</span></span><br><span class="line"><span class="comment"># 第四行 - c 的值为 240</span></span><br><span class="line"><span class="comment"># 第五行 - c 的值为 15</span></span><br></pre></td></tr></table></figure>
 <h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p>有些运算符拥有较高的优先级，二元运算符的运算方向均是从左至右。下表列出了所有运算符以及它们的优先级，由上至下代表优先级由高到低：</p>
-<img src="/2018/10/04/Golang学习笔记note/yunsuanyouxianji.png" title="test">
+<img src="/blog/2018/10/04/Golang学习笔记note/yunsuanyouxianji.png" title="test">
 <p>当然，你可以通过使用括号来临时提升某个表达式的整体运算优先级。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">func <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">   var a int = 20</span><br><span class="line">   var b int = 10</span><br><span class="line">   var c int = 15</span><br><span class="line">   var d int = 5</span><br><span class="line">   var e int;</span><br><span class="line"></span><br><span class="line">   e = (a + b) * c / d;      // ( 30 * 15 ) / 5</span><br><span class="line">   fmt.Printf(<span class="string">"(a + b) * c / d 的值为 : %d\n"</span>,  e );</span><br><span class="line"></span><br><span class="line">   e = ((a + b) * c) / d;    // (30 * 15 ) / 5</span><br><span class="line">   fmt.Printf(<span class="string">"((a + b) * c) / d 的值为  : %d\n"</span> ,  e );</span><br><span class="line"></span><br><span class="line">   e = (a + b) * (c / d);   // (30) * (15/5)</span><br><span class="line">   fmt.Printf(<span class="string">"(a + b) * (c / d) 的值为  : %d\n"</span>,  e );</span><br><span class="line"></span><br><span class="line">   e = a + (b * c) / d;     //  20 + (150/5)</span><br><span class="line">   fmt.Printf(<span class="string">"a + (b * c) / d 的值为  : %d\n"</span> ,  e );  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># (a + b) * c / d 的值为 : 90</span></span><br><span class="line"><span class="comment"># ((a + b) * c) / d 的值为  : 90</span></span><br><span class="line"><span class="comment"># (a + b) * (c / d) 的值为  : 90</span></span><br><span class="line"><span class="comment"># a + (b * c) / d 的值为  : 50</span></span><br></pre></td></tr></table></figure>
 <h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>Map 是一种无序的键值对的集合。Map 最重要的一点是通过 key 来快速检索数据，key 类似于索引，指向数据的值。<br>Map 是一种集合，所以我们可以像迭代数组和切片那样迭代它。不过，Map 是无序的，我们无法决定它的返回顺序，这是因为 Map 是使用 hash 表来实现的。</p>
@@ -326,7 +326,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/10/04/Golang学习笔记note/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://imsongbo.com/2018/10/04/Golang学习笔记note/" alt="微信分享二维码">
     </div>
 </div>
 
