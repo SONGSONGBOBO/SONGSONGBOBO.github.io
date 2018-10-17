@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://imsongbo.com">
-  <title>Tag: hexo | bobobobobo~</title>
+  <title>[Hyperledger-Fabric链码开发] | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="bobobobobo~">
-<meta property="og:url" content="http://imsongbo.com/tags/hexo/index.html">
+  <meta name="description" content="总览 chaincode相关问题 Hyperledger Fabric 链码的开发环境">
+<meta name="keywords" content="Hyperledger-Fabric">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hyperledger-Fabric链码开发]">
+<meta property="og:url" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/index.html">
 <meta property="og:site_name" content="bobobobobo~">
+<meta property="og:description" content="总览 chaincode相关问题 Hyperledger Fabric 链码的开发环境">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/1.png">
+<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/2.png">
+<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/3.png">
+<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/4.png">
+<meta property="og:updated_time" content="2018-10-17T09:22:51.046Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bobobobobo~">
+<meta name="twitter:title" content="[Hyperledger-Fabric链码开发]">
+<meta name="twitter:description" content="总览 chaincode相关问题 Hyperledger Fabric 链码的开发环境">
+<meta name="twitter:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/1.png">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -164,148 +174,232 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Hyperledger-Fabric链码开发" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Hyperledger-Fabric链码开发]
+    </h1>
+  
+
+        
+        <a href="/2018/10/17/Hyperledger-Fabric链码开发/" class="archive-article-date">
+  	<time datetime="2018-10-17T08:40:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-17</time>
+</a>
+        
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">289字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><ul>
+<li>chaincode相关问题</li>
+<li>Hyperledger Fabric 链码的开发环境</li>
+</ul>
+<a id="more"></a>
+<h2 id="chaincode相关问题"><a href="#chaincode相关问题" class="headerlink" title="chaincode相关问题"></a>chaincode相关问题</h2><h3 id="下载相应的包"><a href="#下载相应的包" class="headerlink" title="下载相应的包"></a>下载相应的包</h3><p>需要引用<a href="https://github.com/hyperledger/fabric.git" target="_blank" rel="noopener">github项目</a>，需要下载到GOPATH中创建相关目录<br>从软件库中安装golang的GOPATH一般在/home/go/src/github.com</p>
+<p><a href="https://github.com/SONGSONGBOBO/Hyperledger-Fabric/tree/master/chaincode/chaincode002s" target="_blank" rel="noopener">chaincode002源码</a></p>
+<h2 id="Hyperledger-Fabric-链码的开发环境"><a href="#Hyperledger-Fabric-链码的开发环境" class="headerlink" title="Hyperledger Fabric 链码的开发环境"></a>Hyperledger Fabric 链码的开发环境</h2><h3 id="链码存放"><a href="#链码存放" class="headerlink" title="链码存放"></a>链码存放</h3><p>将 chaincode002 复制到 fabric-samples/chaincode</p>
+<h3 id="开启-3-个终端"><a href="#开启-3-个终端" class="headerlink" title="开启 3 个终端"></a>开启 3 个终端</h3><p><strong>终端 1-启动网网络</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> chaincode-docker-devmode</span><br><span class="line">$ docker-compose -f docker-compose-simple.yaml up</span><br></pre></td></tr></table></figure>
+<p>docker 启动出错:<br>删除所有的 docker 容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+<p><strong>终端 2- 编译且启动链码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it chaincode bash</span><br><span class="line">$ <span class="built_in">cd</span> chaincode002</span><br><span class="line">$ go build</span><br><span class="line">$ CORE_PEER_ADDRESS=peer:7051 CORE_CHAINCODE_ID_NAME=mycc:0 ./chaincode002</span><br></pre></td></tr></table></figure>
+<p><strong>终端 3-操作链码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it cli bash</span><br></pre></td></tr></table></figure>
+<h3 id="安装链码"><a href="#安装链码" class="headerlink" title="安装链码"></a>安装链码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode install -p chaincodedev/chaincode/chaincode002 -n mycc -v 0</span><br></pre></td></tr></table></figure>
+<h3 id="实例化链码"><a href="#实例化链码" class="headerlink" title="实例化链码"></a>实例化链码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode instantiate -n mycc -v 0 -c <span class="string">'&#123;"Args":["str","helloworld"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
+<p>查询链码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["get","str"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query Result: helloworld</span><br></pre></td></tr></table></figure>
+<p>调用链码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode invoke -n mycc -c <span class="string">'&#123;"Args":["set", "str", "helloworld111"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
+<p>查询链码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["get","str"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query Result: helloworld111</span><br></pre></td></tr></table></figure>
+<h3 id="过程截图"><a href="#过程截图" class="headerlink" title="过程截图"></a>过程截图</h3><p><strong>终端1</strong><br><img src="/2018/10/17/Hyperledger-Fabric链码开发/1.png" title="environment01"><br><strong>终端2</strong><br><img src="/2018/10/17/Hyperledger-Fabric链码开发/2.png" title="environment02"><br><strong>终端3</strong><br><img src="/2018/10/17/Hyperledger-Fabric链码开发/3.png" title="environment03"></p>
+<img src="/2018/10/17/Hyperledger-Fabric链码开发/4.png" title="environment04">
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/16/hexo-github-一些功能的实现/" class="archive-article-date">
-  	<time datetime="2018-06-16T01:58:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/16/hexo-github-一些功能的实现/">hexo+github 一些功能的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Hyperledger-Fabric</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/15/hexo-github-常见问题/" class="archive-article-date">
-  	<time datetime="2018-06-15T07:57:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/08/Fabric建立第一个网络/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hyperledger-Fabric建立第一个网络</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/15/hexo-github-常见问题/">hexo+github 常见问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chaincode相关问题"><span class="toc-number"></span> <span class="toc-text">chaincode相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载相应的包"><span class="toc-number">1.</span> <span class="toc-text">下载相应的包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyperledger-Fabric-链码的开发环境"><span class="toc-number"></span> <span class="toc-text">Hyperledger Fabric 链码的开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链码存放"><span class="toc-number">1.</span> <span class="toc-text">链码存放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启-3-个终端"><span class="toc-number">2.</span> <span class="toc-text">开启 3 个终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装链码"><span class="toc-number">3.</span> <span class="toc-text">安装链码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例化链码"><span class="toc-number">4.</span> <span class="toc-text">实例化链码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过程截图"><span class="toc-number">5.</span> <span class="toc-text">过程截图</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
+  
+  
+
+  
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Mi8xMzk5NA==">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/14/hexo-github-building-process/" class="archive-article-date">
-  	<time datetime="2018-06-14T10:44:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/14/hexo-github-building-process/">[hexo+github building process]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+  
+  
+  
+
+  
+
+  
+  
+  
 
 
           </div>
@@ -347,9 +441,9 @@ setInterval("createtime()",250);
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
