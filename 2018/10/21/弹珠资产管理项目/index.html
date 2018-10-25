@@ -6,25 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://imsongbo.com">
-  <title>[Hyperledger-Fabric链码开发] | bobobobobo~</title>
+  <title>[弹珠资产管理项目] | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="总览 chaincode相关问题 Hyperledger Fabric 链码的开发环境">
-<meta name="keywords" content="Hyperledger-Fabric">
+  <meta name="description" content="总览 marbles demo 弹珠管理资产项目开发测试 遇到的问题">
+<meta name="keywords" content="Hyperledger-Fabric,弹珠资产管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Hyperledger-Fabric链码开发]">
-<meta property="og:url" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/index.html">
+<meta property="og:title" content="[弹珠资产管理项目]">
+<meta property="og:url" content="http://imsongbo.com/2018/10/21/弹珠资产管理项目/index.html">
 <meta property="og:site_name" content="bobobobobo~">
-<meta property="og:description" content="总览 chaincode相关问题 Hyperledger Fabric 链码的开发环境">
+<meta property="og:description" content="总览 marbles demo 弹珠管理资产项目开发测试 遇到的问题">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/1.png">
-<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/2.png">
-<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/3.png">
-<meta property="og:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/4.png">
-<meta property="og:updated_time" content="2018-10-17T10:38:38.209Z">
+<meta property="og:image" content="http://imsongbo.com/2018/10/21/弹珠资产管理项目/1.png">
+<meta property="og:updated_time" content="2018-10-25T15:21:15.308Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Hyperledger-Fabric链码开发]">
-<meta name="twitter:description" content="总览 chaincode相关问题 Hyperledger Fabric 链码的开发环境">
-<meta name="twitter:image" content="http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/1.png">
+<meta name="twitter:title" content="[弹珠资产管理项目]">
+<meta name="twitter:description" content="总览 marbles demo 弹珠管理资产项目开发测试 遇到的问题">
+<meta name="twitter:image" content="http://imsongbo.com/2018/10/21/弹珠资产管理项目/1.png">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -174,20 +171,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Hyperledger-Fabric链码开发" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-弹珠资产管理项目" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      [Hyperledger-Fabric链码开发]
+      [弹珠资产管理项目]
     </h1>
   
 
         
-        <a href="/2018/10/17/Hyperledger-Fabric链码开发/" class="archive-article-date">
-  	<time datetime="2018-10-17T08:40:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-17</time>
+        <a href="/2018/10/21/弹珠资产管理项目/" class="archive-article-date">
+  	<time datetime="2018-10-21T13:51:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
 </a>
         
 
@@ -197,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">289字</span>
+        <span class="post-count">596字</span>
       </span>
     </span>
 
@@ -206,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -215,36 +212,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><ul>
-<li>chaincode相关问题</li>
-<li>Hyperledger Fabric 链码的开发环境</li>
+        <h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><ul>
+<li>marbles demo</li>
+<li>弹珠管理资产项目开发测试</li>
+<li>遇到的问题</li>
 </ul>
 <a id="more"></a>
-<h2 id="chaincode相关问题"><a href="#chaincode相关问题" class="headerlink" title="chaincode相关问题"></a>chaincode相关问题</h2><h3 id="下载相应的包"><a href="#下载相应的包" class="headerlink" title="下载相应的包"></a>下载相应的包</h3><p>需要引用<a href="https://github.com/hyperledger/fabric.git" target="_blank" rel="noopener">github项目</a>，需要下载到GOPATH中创建相关目录<br>从软件库中安装golang的GOPATH一般在/home/go/src/github.com</p>
-<p><a href="https://github.com/SONGSONGBOBO/Hyperledger-Fabric/tree/master/chaincode/chaincode002s" target="_blank" rel="noopener">chaincode002源码</a></p>
-<h2 id="Hyperledger-Fabric-链码的开发环境"><a href="#Hyperledger-Fabric-链码的开发环境" class="headerlink" title="Hyperledger Fabric 链码的开发环境"></a>Hyperledger Fabric 链码的开发环境</h2><h3 id="链码存放"><a href="#链码存放" class="headerlink" title="链码存放"></a>链码存放</h3><p>将 chaincode002 复制到 fabric-samples/chaincode</p>
-<h3 id="开启-3-个终端"><a href="#开启-3-个终端" class="headerlink" title="开启 3 个终端"></a>开启 3 个终端</h3><p><strong>终端 1-启动网网络</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> chaincode-docker-devmode</span><br><span class="line">$ docker-compose -f docker-compose-simple.yaml up</span><br></pre></td></tr></table></figure>
-<p>docker 启动出错:<br>删除所有的 docker 容器</p>
+<h2 id="marbles-demo"><a href="#marbles-demo" class="headerlink" title="marbles demo"></a>marbles demo</h2><h3 id="下载demo"><a href="#下载demo" class="headerlink" title="下载demo"></a>下载demo</h3><p><a href="https://github.com/IBM-Blockchain/marbles.git" target="_blank" rel="noopener">下载地址</a><br>仔细阅读文档，有很大帮助</p>
+<h3 id="获取网络"><a href="#获取网络" class="headerlink" title="获取网络"></a>获取网络</h3><p>之前写过，<a href="https://imsongbo.com/2018/10/08/Fabric%E5%BB%BA%E7%AB%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C/">飞机票</a></p>
+<h3 id="清理缓存"><a href="#清理缓存" class="headerlink" title="清理缓存"></a>清理缓存</h3><p><em>杀掉活跃的容器器</em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-<p><strong>终端 2- 编译且启动链码</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it chaincode bash</span><br><span class="line">$ <span class="built_in">cd</span> chaincode002</span><br><span class="line">$ go build</span><br><span class="line">$ CORE_PEER_ADDRESS=peer:7051 CORE_CHAINCODE_ID_NAME=mycc:0 ./chaincode002</span><br></pre></td></tr></table></figure>
-<p><strong>终端 3-操作链码</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it cli bash</span><br></pre></td></tr></table></figure>
-<h3 id="安装链码"><a href="#安装链码" class="headerlink" title="安装链码"></a>安装链码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode install -p chaincodedev/chaincode/chaincode002 -n mycc -v 0</span><br></pre></td></tr></table></figure>
-<h3 id="实例化链码"><a href="#实例化链码" class="headerlink" title="实例化链码"></a>实例化链码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode instantiate -n mycc -v 0 -c <span class="string">'&#123;"Args":["str","helloworld"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
-<p>查询链码:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["get","str"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
-<p>运行结果:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query Result: helloworld</span><br></pre></td></tr></table></figure>
-<p>调用链码:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">peer chaincode invoke -n mycc -c <span class="string">'&#123;"Args":["set", "str", "helloworld111"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
-<p>查询链码:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["get","str"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure>
-<p>运行结果:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query Result: helloworld111</span><br></pre></td></tr></table></figure>
-<h3 id="过程截图"><a href="#过程截图" class="headerlink" title="过程截图"></a>过程截图</h3><p><strong>终端1</strong><br><img src="/2018/10/17/Hyperledger-Fabric链码开发/1.png" title="environment01"><br><strong>终端2</strong><br><img src="/2018/10/17/Hyperledger-Fabric链码开发/2.png" title="environment02"><br><strong>终端3</strong><br><img src="/2018/10/17/Hyperledger-Fabric链码开发/3.png" title="environment03"></p>
-<img src="/2018/10/17/Hyperledger-Fabric链码开发/4.png" title="environment04">
+<p><em>清理理缓存的网网络</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker network prune</span><br></pre></td></tr></table></figure>
+<p><em>删除 fabcar 智能合约的底层链码图像,如果是第一次运行这个项目可以不执行</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi dev-peer0.org1.example.com-fabcar-1.0-5c906e402ed29f20260ae42283216aa75549c571e2e380f3615826365d8269ba</span><br></pre></td></tr></table></figure>
+<h3 id="启动网络"><a href="#启动网络" class="headerlink" title="启动网络"></a>启动网络</h3><p>进入/script，npm install 安装客户端<br>./startFabric.sh 启动网络</p>
+<h3 id="注册用户"><a href="#注册用户" class="headerlink" title="注册用户"></a>注册用户</h3><p><em>注册管理理员用用户</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node enrollAdmin.js</span><br></pre></td></tr></table></figure></p>
+<p><em>注册 user1 用用户</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node registerUser.js</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装并实例化marbles"><a href="#安装并实例化marbles" class="headerlink" title="安装并实例化marbles"></a>安装并实例化marbles</h3><p>修改/marbles/config/connection_profile_local 文件，将对应path修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> marbles</span><br><span class="line">npm install </span><br><span class="line"><span class="built_in">cd</span> scripts</span><br><span class="line">node install_chaincode.js</span><br><span class="line">node instantiate_chaincode.js</span><br></pre></td></tr></table></figure>
+<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp -g</span><br><span class="line">gulp marbles_local</span><br></pre></td></tr></table></figure>
+<p>访问localhost:3001即可，运行结果：</p>
+<img src="/2018/10/21/弹珠资产管理项目/1.png" title="marblestest">
+<h2 id="弹珠管理资产项目开发测试"><a href="#弹珠管理资产项目开发测试" class="headerlink" title="弹珠管理资产项目开发测试"></a>弹珠管理资产项目开发测试</h2><h3 id="部署链码"><a href="#部署链码" class="headerlink" title="部署链码"></a>部署链码</h3><p>将<a href="https://github.com/SONGSONGBOBO/Hyperledger-Fabric/tree/master/chaincode/chaincode006" target="_blank" rel="noopener">弹珠资产管理系统的链码</a>拷贝到 fabric-samples/chaincode<br>进入入链码开发目目录fabric-samples/chaincode-docker-devmode<br>打开 3 个终端<br><em>终端 1</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose -f docker-compose-simple.yaml up</span><br></pre></td></tr></table></figure></p>
+<p><em>终端 2</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it chaincode bash</span><br><span class="line">$ <span class="built_in">cd</span> chaincode006</span><br><span class="line">$ go build</span><br><span class="line">$ CORE_PEER_ADDRESS=peer:7051</span><br><span class="line">CORE_CHAINCODE_ID_NAME=mycc:0 ./chaincode006</span><br></pre></td></tr></table></figure></p>
+<p><em>终端 3</em><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it cli bash</span><br><span class="line">$ peer chaincode install -p chaincodedev/chaincode/chaincode006 -n mycc -v 0</span><br><span class="line">$ peer chaincode instantiate -n mycc -v 0 -c <span class="string">'&#123;"Args":[]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble1","blue","35","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble2","red","50","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble3","blue","70","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["readMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["transferMarble","marble2","jerry"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["readMarble","marble2"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c <span class="string">'&#123;"Args":["deleteMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["getMarblesByRange","marble1","marble3"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["getHistoryForMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["queryMarblesByOwner","tom"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure></p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="运行marbles项目时获取不到admin密钥"><a href="#运行marbles项目时获取不到admin密钥" class="headerlink" title="运行marbles项目时获取不到admin密钥"></a>运行marbles项目时获取不到admin密钥</h3><p>将/fabric-samples/fabcar/hfc-key-store/文件夹所有内容拷贝到/home/.hfc-key-store</p>
+<h3 id="富查询报错"><a href="#富查询报错" class="headerlink" title="富查询报错"></a>富查询报错</h3><p>富查询需要配置 CouchDB<br>chaincode for develop 配置 CouchDB<br>修改 chaincode-docker-devmode/docker-compose-simple.yaml 配置</p>
+<p>peer 加入如下配置：<br>environment:</p>
+<ul>
+<li>CORE_LEDGER_STATE_STATEDATABASE=CouchDB</li>
+<li>CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984</li>
+<li>CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=</li>
+<li>CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=<br>depends_on:</li>
+<li>orderer</li>
+<li>couchdb</li>
+</ul>
+<p>couchdb:<br>container_name: couchdb<br>image: hyperledger/fabric-couchdb</p>
+<h1 id="Populate-the-COUCHDB-USER-and-COUCHDB-PASSWORD-to-set-an-admin-user-and"><a href="#Populate-the-COUCHDB-USER-and-COUCHDB-PASSWORD-to-set-an-admin-user-and" class="headerlink" title="Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and"></a>Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and</h1><p>password</p>
+<h1 id="for-CouchDB-This-will-prevent-CouchDB-from-operating-in-an-“Admin-Party”"><a href="#for-CouchDB-This-will-prevent-CouchDB-from-operating-in-an-“Admin-Party”" class="headerlink" title="for CouchDB. This will prevent CouchDB from operating in an “Admin Party”"></a>for CouchDB. This will prevent CouchDB from operating in an “Admin Party”</h1><p>mode.<br>environment:</p>
+<ul>
+<li>COUCHDB_USER=</li>
+<li>COUCHDB_PASSWORD=<br>ports:</li>
+<li>5984:5984</li>
+</ul>
 
       
 
@@ -259,6 +270,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Hyperledger-Fabric</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">弹珠资产管理</a>
         		</li>
       		
 		</ul>
@@ -314,7 +329,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://imsongbo.com/2018/10/17/Hyperledger-Fabric链码开发/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://imsongbo.com/2018/10/21/弹珠资产管理项目/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -328,18 +343,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/10/21/弹珠资产管理项目/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          [弹珠资产管理项目]
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/10/08/Fabric建立第一个网络/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hyperledger-Fabric建立第一个网络</div>
+    <a href="/2018/10/17/Hyperledger-Fabric链码开发/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[Hyperledger-Fabric链码开发]</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -366,7 +372,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chaincode相关问题"><span class="toc-number"></span> <span class="toc-text">chaincode相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载相应的包"><span class="toc-number">1.</span> <span class="toc-text">下载相应的包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyperledger-Fabric-链码的开发环境"><span class="toc-number"></span> <span class="toc-text">Hyperledger Fabric 链码的开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链码存放"><span class="toc-number">1.</span> <span class="toc-text">链码存放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启-3-个终端"><span class="toc-number">2.</span> <span class="toc-text">开启 3 个终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装链码"><span class="toc-number">3.</span> <span class="toc-text">安装链码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例化链码"><span class="toc-number">4.</span> <span class="toc-text">实例化链码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#过程截图"><span class="toc-number">5.</span> <span class="toc-text">过程截图</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marbles-demo"><span class="toc-number">2.</span> <span class="toc-text">marbles demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载demo"><span class="toc-number">2.1.</span> <span class="toc-text">下载demo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取网络"><span class="toc-number">2.2.</span> <span class="toc-text">获取网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清理缓存"><span class="toc-number">2.3.</span> <span class="toc-text">清理缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动网络"><span class="toc-number">2.4.</span> <span class="toc-text">启动网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册用户"><span class="toc-number">2.5.</span> <span class="toc-text">注册用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装并实例化marbles"><span class="toc-number">2.6.</span> <span class="toc-text">安装并实例化marbles</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行项目"><span class="toc-number">2.7.</span> <span class="toc-text">运行项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#弹珠管理资产项目开发测试"><span class="toc-number">3.</span> <span class="toc-text">弹珠管理资产项目开发测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署链码"><span class="toc-number">3.1.</span> <span class="toc-text">部署链码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">4.</span> <span class="toc-text">遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行marbles项目时获取不到admin密钥"><span class="toc-number">4.1.</span> <span class="toc-text">运行marbles项目时获取不到admin密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#富查询报错"><span class="toc-number">4.2.</span> <span class="toc-text">富查询报错</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Populate-the-COUCHDB-USER-and-COUCHDB-PASSWORD-to-set-an-admin-user-and"><span class="toc-number"></span> <span class="toc-text">Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-CouchDB-This-will-prevent-CouchDB-from-operating-in-an-“Admin-Party”"><span class="toc-number"></span> <span class="toc-text">for CouchDB. This will prevent CouchDB from operating in an “Admin Party”</span></a>
                     </div>
                 </span>
             </div>
