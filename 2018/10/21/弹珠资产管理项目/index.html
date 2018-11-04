@@ -17,7 +17,7 @@
 <meta property="og:description" content="总览 marbles demo 弹珠管理资产项目开发测试 遇到的问题">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://imsongbo.com/2018/10/21/弹珠资产管理项目/1.png">
-<meta property="og:updated_time" content="2018-10-25T15:25:37.163Z">
+<meta property="og:updated_time" content="2018-11-02T14:11:15.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[弹珠资产管理项目]">
 <meta name="twitter:description" content="总览 marbles demo 弹珠管理资产项目开发测试 遇到的问题">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">596字</span>
+        <span class="post-count">594字</span>
       </span>
     </span>
 
@@ -220,9 +220,9 @@
 <a id="more"></a>
 <h2 id="marbles-demo"><a href="#marbles-demo" class="headerlink" title="marbles demo"></a>marbles demo</h2><h3 id="下载demo"><a href="#下载demo" class="headerlink" title="下载demo"></a>下载demo</h3><p><a href="https://github.com/IBM-Blockchain/marbles.git" target="_blank" rel="noopener">下载地址</a><br>仔细阅读文档，有很大帮助</p>
 <h3 id="获取网络"><a href="#获取网络" class="headerlink" title="获取网络"></a>获取网络</h3><p>之前写过，<a href="https://imsongbo.com/2018/10/08/Fabric%E5%BB%BA%E7%AB%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C/">飞机票</a></p>
-<h3 id="清理缓存"><a href="#清理缓存" class="headerlink" title="清理缓存"></a>清理缓存</h3><p><strong>杀掉活跃的容器器</strong></p>
+<h3 id="清理缓存"><a href="#清理缓存" class="headerlink" title="清理缓存"></a>清理缓存</h3><p><strong>杀掉活跃的容器</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-<p><strong>清理理缓存的网网络</strong></p>
+<p><strong>清理缓存的网络</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker network prune</span><br></pre></td></tr></table></figure>
 <p><strong>删除 fabcar 智能合约的底层链码图像,如果是第一次运行这个项目可以不执行</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi dev-peer0.org1.example.com-fabcar-1.0-5c906e402ed29f20260ae42283216aa75549c571e2e380f3615826365d8269ba</span><br></pre></td></tr></table></figure>
@@ -237,7 +237,7 @@
 <h2 id="弹珠管理资产项目开发测试"><a href="#弹珠管理资产项目开发测试" class="headerlink" title="弹珠管理资产项目开发测试"></a>弹珠管理资产项目开发测试</h2><h3 id="部署链码"><a href="#部署链码" class="headerlink" title="部署链码"></a>部署链码</h3><p>将<a href="https://github.com/SONGSONGBOBO/Hyperledger-Fabric/tree/master/chaincode/chaincode006" target="_blank" rel="noopener">弹珠资产管理系统的链码</a>拷贝到 fabric-samples/chaincode<br>进入入链码开发目目录fabric-samples/chaincode-docker-devmode<br>打开 3 个终端<br><strong>终端 1</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose -f docker-compose-simple.yaml up</span><br></pre></td></tr></table></figure></p>
 <p><strong>终端 2</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it chaincode bash</span><br><span class="line">$ <span class="built_in">cd</span> chaincode006</span><br><span class="line">$ go build</span><br><span class="line">$ CORE_PEER_ADDRESS=peer:7051</span><br><span class="line">CORE_CHAINCODE_ID_NAME=mycc:0 ./chaincode006</span><br></pre></td></tr></table></figure></p>
 <p><strong>终端 3</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it cli bash</span><br><span class="line">$ peer chaincode install -p chaincodedev/chaincode/chaincode006 -n mycc -v 0</span><br><span class="line">$ peer chaincode instantiate -n mycc -v 0 -c <span class="string">'&#123;"Args":[]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble1","blue","35","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble2","red","50","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble3","blue","70","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["readMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["transferMarble","marble2","jerry"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["readMarble","marble2"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c <span class="string">'&#123;"Args":["deleteMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["getMarblesByRange","marble1","marble3"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["getHistoryForMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["queryMarblesByOwner","tom"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure></p>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="运行marbles项目时获取不到admin密钥"><a href="#运行marbles项目时获取不到admin密钥" class="headerlink" title="运行marbles项目时获取不到admin密钥"></a>运行marbles项目时获取不到admin密钥</h3><p>将/fabric-samples/fabcar/hfc-key-store/文件夹所有内容拷贝到/home/.hfc-key-store</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="运行marbles项目时获取不到admin密钥"><a href="#运行marbles项目时获取不到admin密钥" class="headerlink" title="运行marbles项目时获取不到admin密钥"></a>运行marbles项目时获取不到admin密钥</h3><p>将/fabric-samples/fabcar/hfc-key-store/文件夹所有内容拷贝到/home/xxx/.hfc-key-store</p>
 <h3 id="富查询报错"><a href="#富查询报错" class="headerlink" title="富查询报错"></a>富查询报错</h3><p>富查询需要配置 CouchDB<br>chaincode for develop 配置 CouchDB<br>修改 chaincode-docker-devmode/docker-compose-simple.yaml 配置</p>
 <p>peer 加入如下配置：<br>environment:</p>
 <ul>
@@ -280,6 +280,17 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Hyperledger-Fabric//" class="article-tag-list-link color4">Hyperledger-Fabric</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -342,6 +353,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/10/30/fabric遇到的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          [fabric遇到的问题]
+        
+      </div>
+    </a>
   
   
     <a href="/2018/10/17/Hyperledger-Fabric链码开发/" id="article-nav-older" class="article-nav-link-wrap">
@@ -527,7 +547,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Hyperleger-Fabric</a>
+                <a href="javascript:void(0)" class="js-tag color4">Hyperledger-Fabric</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,10 +559,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Hyperledger-Fabric</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -551,11 +567,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">弹珠资产管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">弹珠资产管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
