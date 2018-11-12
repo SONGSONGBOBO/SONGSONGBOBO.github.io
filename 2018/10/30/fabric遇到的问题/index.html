@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="bobobobobo~">
 <meta property="og:description" content="总览">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-30T12:54:09.829Z">
+<meta property="og:updated_time" content="2018-11-05T13:02:13.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[fabric遇到的问题]">
 <meta name="twitter:description" content="总览">
@@ -192,7 +192,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">153字</span>
+        <span class="post-count">513字</span>
       </span>
     </span>
 
@@ -201,7 +201,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -218,6 +218,25 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERRO 001 Cannot run peer because cannot init crypto, folder <span class="string">"/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp"</span> does not exist</span><br></pre></td></tr></table></figure>
 <p>下面的目录指向MSP的对等证书所在的位置。这些文件是使用../bin/cryptogen generate –config=./crypto-config.yaml教程中的命令生成的。错误消息是由于该目录不存在或包含所需的证书而导致对等方无法启动。我会确保对等容器在该位置具有那些证书，一种方式是Docker exec进入它。</p>
 <p><a href="mailto:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com" target="_blank" rel="noopener">/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com</a>/msp</p>
+<h3 id="Orderer-Client-failed-to-connect-to-orderer-example-com"><a href="#Orderer-Client-failed-to-connect-to-orderer-example-com" class="headerlink" title="Orderer Client failed to connect to orderer.example.com"></a>Orderer Client failed to connect to orderer.example.com</h3><p>Orderer Client failed to connect to orderer.example.com</p>
+<p>do a docker ps and see if the orderer is up and running if not do a docker logs orderer.example.com and check orderers logs usually the orderer logs give clear clues on what has happened read the logs and fix the issue . that’s what i did</p>
+<p>and instead of creating a peer first going inside it and creating a channel ,i suggest you create the channel first and join the peer to it afterwards</p>
+<p>Create the channel</p>
+<p>docker exec -e “CORE_PEER_LOCALMSPID=Org1MSP” -e “<a href="mailto:CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com" target="_blank" rel="noopener">CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com</a>/msp” peer0.org1.tracexyz.com peer channel create -o orderer.tracexyz.com:7050 -c cheeseproduction -f /etc/hyperledger/configtx/channel.tx</p>
+<p>Add peer 0 to the channel</p>
+<p>docker exec -e “CORE_PEER_LOCALMSPID=Org1MSP” -e “<a href="mailto:CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com" target="_blank" rel="noopener">CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com</a>/msp” peer0.org1.tracexyz.com peer channel join -b cheeseproduction.block</p>
+<p>Fetch from peer 1</p>
+<p>docker exec -e “<a href="mailto:CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com" target="_blank" rel="noopener">CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com</a>/msp” peer1.org1.tracexyz.com peer channel fetch config -o orderer.tracexyz.com:7050 -c cheeseproduction</p>
+<p>Join peer 1 also to the channel</p>
+<p>docker exec -e “CORE_PEER_LOCALMSPID=Org1MSP” -e “<a href="mailto:CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com" target="_blank" rel="noopener">CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.tracexyz.com</a>/msp” -e “CORE_PEER_ADDRESS=peer1.org1.tracexyz.com:7061” peer0.org1.tracexyz.com peer channel join -b cheeseproduction.block</p>
+<p>this is how i connected two peers to a single channel. my org name was tracexyz (tracexyz instead of example ) and my channel name was cheeseproduction</p>
+<p>I guesss you can replace those with your own values</p>
+<p>after doing these go inside the peer with</p>
+<p>docker exec -it cli bash</p>
+<p>it will take you inside the default peer which is peer0.org1</p>
+<p>then do a peer channel list to see the channels to which peer0 has joined</p>
+<p>you will see it will list cheeseproduction</p>
+<h3 id="测试链码时-Received-error-from-server-ending-chaincode-stream-rpc-error-code-Unimplemented-desc-unknown-service-protos-ChaincodeSupport-receive-failed"><a href="#测试链码时-Received-error-from-server-ending-chaincode-stream-rpc-error-code-Unimplemented-desc-unknown-service-protos-ChaincodeSupport-receive-failed" class="headerlink" title="测试链码时 Received error from server, ending chaincode stream: rpc error: code = Unimplemented desc = unknown service protos.ChaincodeSupport receive failed"></a>测试链码时 Received error from server, ending chaincode stream: rpc error: code = Unimplemented desc = unknown service protos.ChaincodeSupport receive failed</h3><p>在v1.1中，端口是7052而不是像在v1.0中那样是7051</p>
 
       
 
@@ -301,6 +320,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/11/01/天冷了/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          [天冷了]
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/10/21/弹珠资产管理项目/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">[弹珠资产管理项目]</div>
@@ -330,7 +358,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Orderer-Client-failed-to-connect-to-orderer-example-com"><span class="toc-number">2.</span> <span class="toc-text">Orderer Client failed to connect to orderer.example.com</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试链码时-Received-error-from-server-ending-chaincode-stream-rpc-error-code-Unimplemented-desc-unknown-service-protos-ChaincodeSupport-receive-failed"><span class="toc-number">3.</span> <span class="toc-text">测试链码时 Received error from server, ending chaincode stream: rpc error: code = Unimplemented desc = unknown service protos.ChaincodeSupport receive failed</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -485,15 +513,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Hyperledger-Fabric</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Hyperledger-Fabric</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,11 +533,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">弹珠资产管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">private-data</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">弹珠资产管理</a>
               </li>
             
             <div class="clearfix"></div>

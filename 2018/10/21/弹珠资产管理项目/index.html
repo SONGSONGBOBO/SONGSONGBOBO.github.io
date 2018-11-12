@@ -17,7 +17,7 @@
 <meta property="og:description" content="总览 marbles demo 弹珠管理资产项目开发测试 遇到的问题">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://imsongbo.com/2018/10/21/弹珠资产管理项目/1.png">
-<meta property="og:updated_time" content="2018-11-02T14:11:15.098Z">
+<meta property="og:updated_time" content="2018-11-05T12:49:05.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[弹珠资产管理项目]">
 <meta name="twitter:description" content="总览 marbles demo 弹珠管理资产项目开发测试 遇到的问题">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">594字</span>
+        <span class="post-count">618字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">3分</span>
       </span>
     </span>
 </div>
@@ -239,23 +239,7 @@
 <p><strong>终端 3</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it cli bash</span><br><span class="line">$ peer chaincode install -p chaincodedev/chaincode/chaincode006 -n mycc -v 0</span><br><span class="line">$ peer chaincode instantiate -n mycc -v 0 -c <span class="string">'&#123;"Args":[]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble1","blue","35","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble2","red","50","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["initMarble","marble3","blue","70","tom"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["readMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["transferMarble","marble2","jerry"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["readMarble","marble2"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode invoke -n mycc -c <span class="string">'&#123;"Args":["deleteMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["getMarblesByRange","marble1","marble3"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c</span><br><span class="line"><span class="string">'&#123;"Args":["getHistoryForMarble","marble1"]&#125;'</span> -C myc</span><br><span class="line">$ peer chaincode query -n mycc -c <span class="string">'&#123;"Args":["queryMarblesByOwner","tom"]&#125;'</span> -C myc</span><br></pre></td></tr></table></figure></p>
 <h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="运行marbles项目时获取不到admin密钥"><a href="#运行marbles项目时获取不到admin密钥" class="headerlink" title="运行marbles项目时获取不到admin密钥"></a>运行marbles项目时获取不到admin密钥</h3><p>将/fabric-samples/fabcar/hfc-key-store/文件夹所有内容拷贝到/home/xxx/.hfc-key-store</p>
 <h3 id="富查询报错"><a href="#富查询报错" class="headerlink" title="富查询报错"></a>富查询报错</h3><p>富查询需要配置 CouchDB<br>chaincode for develop 配置 CouchDB<br>修改 chaincode-docker-devmode/docker-compose-simple.yaml 配置</p>
-<p>peer 加入如下配置：<br>environment:</p>
-<ul>
-<li>CORE_LEDGER_STATE_STATEDATABASE=CouchDB</li>
-<li>CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984</li>
-<li>CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=</li>
-<li>CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=<br>depends_on:</li>
-<li>orderer</li>
-<li>couchdb</li>
-</ul>
-<p>couchdb:<br>container_name: couchdb<br>image: hyperledger/fabric-couchdb</p>
-<h1 id="Populate-the-COUCHDB-USER-and-COUCHDB-PASSWORD-to-set-an-admin-user-and"><a href="#Populate-the-COUCHDB-USER-and-COUCHDB-PASSWORD-to-set-an-admin-user-and" class="headerlink" title="Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and"></a>Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and</h1><p>password</p>
-<h1 id="for-CouchDB-This-will-prevent-CouchDB-from-operating-in-an-“Admin-Party”"><a href="#for-CouchDB-This-will-prevent-CouchDB-from-operating-in-an-“Admin-Party”" class="headerlink" title="for CouchDB. This will prevent CouchDB from operating in an “Admin Party”"></a>for CouchDB. This will prevent CouchDB from operating in an “Admin Party”</h1><p>mode.<br>environment:</p>
-<ul>
-<li>COUCHDB_USER=</li>
-<li>COUCHDB_PASSWORD=<br>ports:</li>
-<li>5984:5984</li>
-</ul>
+<p>peer 加入如下配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  environment:</span><br><span class="line">    - CORE_PEER_ID=peer</span><br><span class="line">    - CORE_PEER_ADDRESS=peer:7051</span><br><span class="line">    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer:7051</span><br><span class="line">    - CORE_PEER_LOCALMSPID=DEFAULT</span><br><span class="line">    - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock</span><br><span class="line">    - CORE_LOGGING_LEVEL=DEBUG</span><br><span class="line">    - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp</span><br><span class="line">    - CORE_LEDGER_STATE_STATEDATABASE=CouchDB</span><br><span class="line">    - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984</span><br><span class="line">    - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=</span><br><span class="line">    - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=</span><br><span class="line">  depends_on:</span><br><span class="line">    - orderer</span><br><span class="line">    - couchdb</span><br><span class="line">couchdb:</span><br><span class="line">  container_name: couchdb</span><br><span class="line">  image: hyperledger/fabric-couchdb</span><br><span class="line">  <span class="comment"># Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user andpassword</span></span><br><span class="line">  <span class="comment"># for CouchDB. This will prevent CouchDB from operating in an "Admin Party" mode.</span></span><br><span class="line">  environment:</span><br><span class="line">    - COUCHDB_USER=</span><br><span class="line">    - COUCHDB_PASSWORD=</span><br><span class="line">  ports:</span><br><span class="line">    - 5984:5984</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -392,7 +376,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marbles-demo"><span class="toc-number">2.</span> <span class="toc-text">marbles demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载demo"><span class="toc-number">2.1.</span> <span class="toc-text">下载demo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取网络"><span class="toc-number">2.2.</span> <span class="toc-text">获取网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清理缓存"><span class="toc-number">2.3.</span> <span class="toc-text">清理缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动网络"><span class="toc-number">2.4.</span> <span class="toc-text">启动网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册用户"><span class="toc-number">2.5.</span> <span class="toc-text">注册用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装并实例化marbles"><span class="toc-number">2.6.</span> <span class="toc-text">安装并实例化marbles</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行项目"><span class="toc-number">2.7.</span> <span class="toc-text">运行项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#弹珠管理资产项目开发测试"><span class="toc-number">3.</span> <span class="toc-text">弹珠管理资产项目开发测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署链码"><span class="toc-number">3.1.</span> <span class="toc-text">部署链码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">4.</span> <span class="toc-text">遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行marbles项目时获取不到admin密钥"><span class="toc-number">4.1.</span> <span class="toc-text">运行marbles项目时获取不到admin密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#富查询报错"><span class="toc-number">4.2.</span> <span class="toc-text">富查询报错</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Populate-the-COUCHDB-USER-and-COUCHDB-PASSWORD-to-set-an-admin-user-and"><span class="toc-number"></span> <span class="toc-text">Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-CouchDB-This-will-prevent-CouchDB-from-operating-in-an-“Admin-Party”"><span class="toc-number"></span> <span class="toc-text">for CouchDB. This will prevent CouchDB from operating in an “Admin Party”</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marbles-demo"><span class="toc-number">2.</span> <span class="toc-text">marbles demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载demo"><span class="toc-number">2.1.</span> <span class="toc-text">下载demo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取网络"><span class="toc-number">2.2.</span> <span class="toc-text">获取网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清理缓存"><span class="toc-number">2.3.</span> <span class="toc-text">清理缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动网络"><span class="toc-number">2.4.</span> <span class="toc-text">启动网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册用户"><span class="toc-number">2.5.</span> <span class="toc-text">注册用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装并实例化marbles"><span class="toc-number">2.6.</span> <span class="toc-text">安装并实例化marbles</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行项目"><span class="toc-number">2.7.</span> <span class="toc-text">运行项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#弹珠管理资产项目开发测试"><span class="toc-number">3.</span> <span class="toc-text">弹珠管理资产项目开发测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署链码"><span class="toc-number">3.1.</span> <span class="toc-text">部署链码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">4.</span> <span class="toc-text">遇到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行marbles项目时获取不到admin密钥"><span class="toc-number">4.1.</span> <span class="toc-text">运行marbles项目时获取不到admin密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#富查询报错"><span class="toc-number">4.2.</span> <span class="toc-text">富查询报错</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -547,15 +531,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Hyperledger-Fabric</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Golang</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Hyperledger-Fabric</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -567,11 +551,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">弹珠资产管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">private-data</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">弹珠资产管理</a>
               </li>
             
             <div class="clearfix"></div>
