@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://imsongbo.com">
-  <title>Archives: 2018 | bobobobobo~</title>
+  <title>[fabric架构原理] | bobobobobo~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="bobobobobo~">
-<meta property="og:url" content="http://imsongbo.com/archives/2018/page/2/index.html">
+  <meta name="description" content="总览 推荐博客和书籍 架构 事务处理 读写集 总结">
+<meta name="keywords" content="Hyperledger-Fabric">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[fabric架构原理]">
+<meta property="og:url" content="http://imsongbo.com/2018/11/01/fabric架构原理/index.html">
 <meta property="og:site_name" content="bobobobobo~">
+<meta property="og:description" content="总览 推荐博客和书籍 架构 事务处理 读写集 总结">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://imsongbo.com/2018/11/01/fabric架构原理/1.png">
+<meta property="og:image" content="http://imsongbo.com/2018/11/01/fabric架构原理/2.png">
+<meta property="og:image" content="http://imsongbo.com/2018/11/01/fabric架构原理/3.png">
+<meta property="og:updated_time" content="2018-11-13T11:32:40.415Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bobobobobo~">
+<meta name="twitter:title" content="[fabric架构原理]">
+<meta name="twitter:description" content="总览 推荐博客和书籍 架构 事务处理 读写集 总结">
+<meta name="twitter:image" content="http://imsongbo.com/2018/11/01/fabric架构原理/1.png">
   
     <link rel="alternative" href="/atom.xml" title="bobobobobo~" type="application/atom+xml">
   
@@ -173,284 +182,235 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-fabric架构原理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+         
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [fabric架构原理]
+    </h1>
+  
+
+        
+        <a href="/2018/11/01/fabric架构原理/" class="archive-article-date">
+  	<time datetime="2018-11-01T11:15:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-01</time>
+</a>
+        
+
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">582字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">2分</span>
+      </span>
+    </span>
+</div>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h3><ul>
+<li>推荐博客和书籍</li>
+<li>架构</li>
+<li>事务处理</li>
+<li>读写集</li>
+<li>总结</li>
+</ul>
+<a id="more"></a>
+<h3 id="推荐博客"><a href="#推荐博客" class="headerlink" title="推荐博客"></a>推荐博客</h3><p><a href="https://www.lijiaocn.com/%E9%A1%B9%E7%9B%AE/2018/06/25/hyperledger-fabric-main-point.html" target="_blank" rel="noopener">李佶澳</a></p>
+<p>书籍:随便一本就行</p>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><img src="/2018/11/01/fabric架构原理/1.png" title="架构">
+<p>单一的peer节点在1.0中进行了拆分，分为peer（背书节点和提交节点）和orderer（排序节点）。membership也就是CA节点</p>
+<img src="/2018/11/01/fabric架构原理/2.png" title="账本">
+<p>Fabric 1.0中的账本分为3种：<br>    1.区块链数据，这是用文件系统存储在Committer节点上的。区块链中存储了Transaction的读写集。<br>    2.为了检索区块链的方便，所以用LevelDB对其中的Transaction进行了索引。<br>    3.ChainCode操作的实际数据存储在State Database中，这是一个Key Value的数据库，默认采用的LevelDB，1.0也支持使用CouchDB作为State Database。</p>
+<h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><img src="/2018/11/01/fabric架构原理/3.png" title="事物处理">
+<h3 id="读写集"><a href="#读写集" class="headerlink" title="读写集"></a>读写集</h3><p>在背书人交易模拟期间，会为交易准备一个读写数据集。读集包含一份唯一键的列表和该键的提交版本，用于交易模拟期间读取。写集包含一份唯一键的列表（键值可能与读集有重叠）和交易写入的对应的新键值。如果交易更新是删除该键，那么会对该键做一个删除标记。 </p>
+<p>进一步的，如果交易对一个键对应的值进行多次写操作，该键只会保留最后一次写入的值。同样，如果交易读取一个键对应的值，会返回处于已提交状态的值。即使在进行读取操作之前该交易已经更新了该键的值。换句话说就是，不支持在交易中读取该交易写入的数据。</p>
+<p>提交者使用读写集的读集部分校验一笔交易的有效性，使用写集更新相关键的版本和键值。 </p>
+<p>在验证阶段，如果一笔交易中每个读集中的键与世界状态中对应键的版本号一致，那么该笔交易被认为是有效的–假设先前的有效交易都已经被提交了，包括同一区块中的先前交易。 </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>提交peer上区块同步存储账本全部信息，状态数据库保存当前世界状态，建立索引，快速进行查询<br>读写操作，读只需peer地址，而写需要排序节点。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/02/Golang学习笔记2/" class="archive-article-date">
-  	<time datetime="2018-10-02T05:00:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/02/Golang学习笔记2/">Golang学习笔记2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Hyperledger-Fabric</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://imsongbo.com/2018/11/01/fabric架构原理/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/01/Golang学习笔记1/" class="archive-article-date">
-  	<time datetime="2018-10-01T06:12:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-01</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/11/01/天冷了/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          [天冷了]
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/30/fabric遇到的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[fabric遇到的问题]</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/01/Golang学习笔记1/">Golang学习笔记1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#总览"><span class="toc-number">1.</span> <span class="toc-text">总览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐博客"><span class="toc-number">2.</span> <span class="toc-text">推荐博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架构"><span class="toc-number">3.</span> <span class="toc-text">架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事务处理"><span class="toc-number">4.</span> <span class="toc-text">事务处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读写集"><span class="toc-number">5.</span> <span class="toc-text">读写集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
+  
+  
+
+
+  
+  
+
+  
+
+  
+  
+  
+
+  
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNzQ2Mi8xMzk5NA==">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/16/hexo-github-一些功能的实现/" class="archive-article-date">
-  	<time datetime="2018-06-16T01:58:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/16/hexo-github-一些功能的实现/">hexo+github 一些功能的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/15/hexo-github-常见问题/" class="archive-article-date">
-  	<time datetime="2018-06-15T07:57:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/15/hexo-github-常见问题/">hexo+github 常见问题</a>
-    </h1>
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/14/hexo-github-building-process/" class="archive-article-date">
-  	<time datetime="2018-06-14T10:44:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/14/hexo-github-building-process/">[hexo+github building process]</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/13/test-my-site-1/" class="archive-article-date">
-  	<time datetime="2018-06-12T18:12:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/13/test-my-site-1/">hello myfriend</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/essay//" class="article-tag-list-link color1">essay</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -493,8 +453,8 @@ setInterval("createtime()",250);
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
