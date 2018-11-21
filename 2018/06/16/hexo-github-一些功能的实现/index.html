@@ -425,7 +425,8 @@
    var notify = 'false' == true ? true : false;
    var verify = 'false' == true ? true : false;
     //window.onload = function() {
-        new Valine({
+        var valine = new Valine();
+        valine.init({
             el: '#comment',
             notify: notify,
             verify: verify,
